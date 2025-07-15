@@ -1,14 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../providers/todo_provider.dart';
 
-class TodoListScreen extends StatelessWidget {
+class TodoListScreen extends ConsumerWidget {
   const TodoListScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todoAsyncValue = ref.watch(todoListProvider);
+
     return Scaffold(
       appBar: AppBar(title: const Text('Todos')),
-      body: const Center(
-        child: Text('TODO: Implement API call and list UI'),
+      body: todoAsyncValue.when(
+        data: (todos) => ListView.builder(
+          itemCount: todos.length,
+          itemBuilder: (context, index) {
+            final todo = todos[index];
+            return ListTile(
+              leading: Icon(
+                  todo.completed ? Icons.check_circle : Icons.circle_outlined,
+                  color: todo.completed ? Colors.green : Colors.grey),
+              title: Text(todo.title),
+              subtitle: Text('ID: ${todo.id}'),
+            );
+          },
+        ),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (err, _) => Center(child: Text('Error: $err')),
       ),
     );
   }
