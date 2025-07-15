@@ -18,13 +18,13 @@ Consume a REST API and display results in a list with proper loading and error h
 - Code clarity and modularity
 - State management usage
 - UI feedback (loading/error)
-- Clean architecture and comments
+- Clean architecture
 
 ## 🛠 Setup
 ```bash
 git clone https://github.com/juansalasvo2/flutter_api_assignment.git
 flutter pub get
-flutter run
+flutter run -d chrome
 ```
 
 Good luck!
