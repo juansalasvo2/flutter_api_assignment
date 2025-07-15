@@ -22,7 +22,7 @@ Consume a REST API and display results in a list with proper loading and error h
 
 ## 🛠 Setup
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/juansalasvo2/flutter_api_assignment.git
 flutter pub get
 flutter run
 ```
